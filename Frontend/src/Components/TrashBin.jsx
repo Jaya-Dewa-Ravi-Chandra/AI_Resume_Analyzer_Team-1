@@ -8,7 +8,7 @@ const TrashBin = () => {
 
   const fetchTrash = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/resumeApi/trash", {
+      const res = await axios.get("https://ai-resume-analyzer-team-1.onrender.com/resumeApi/trash", {
         withCredentials: true,
       });
 
@@ -24,7 +24,7 @@ const TrashBin = () => {
 
   const handleRestore = async (id) => {
     await axios.patch(
-      `http://localhost:4000/resumeApi/restore/${id}`,
+      `https://ai-resume-analyzer-team-1.onrender.com/resumeApi/restore/${id}`,
       {},
       { withCredentials: true },
     );
@@ -32,7 +32,7 @@ const TrashBin = () => {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:4000/resumeApi/permanent/${id}`, {
+    await axios.delete(`https://ai-resume-analyzer-team-1.onrender.com/resumeApi/permanent/${id}`, {
       withCredentials: true,
     });
     fetchTrash();
