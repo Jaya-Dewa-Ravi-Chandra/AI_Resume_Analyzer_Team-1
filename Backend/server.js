@@ -8,6 +8,7 @@ import {adminApp} from "./API/adminAPI.js";
 import cors from "cors"
 config();
 const app=exp();
+app.set("trust proxy", 1);
 app.use(
   cors({
     origin: "https://ai-resume-analyzer-team-1.vercel.app",
