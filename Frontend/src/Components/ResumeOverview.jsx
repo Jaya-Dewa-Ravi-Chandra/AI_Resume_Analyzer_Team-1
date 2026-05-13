@@ -26,7 +26,7 @@ function ResumeOverview() {
   const fetchResume = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:4000/resumeApi/resume/${id}`,
+        `https://ai-resume-analyzer-team-1.onrender.com/resumeApi/resume/${id}`,
         {
           withCredentials: true,
         },
