@@ -23,7 +23,7 @@ function AdminProfile() {
     try {
       setLoading(true);
 
-      const res = await axios.get("http://localhost:4000/adminApi/emails", {
+      const res = await axios.get("https://ai-resume-analyzer-team-1.onrender.com/adminApi/emails", {
         withCredentials: true,
       });
 
