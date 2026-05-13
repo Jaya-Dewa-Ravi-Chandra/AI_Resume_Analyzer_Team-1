@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const API = "http://localhost:4000/commonApi";
+const API = "https://ai-resume-analyzer-team-1.onrender.com/commonApi";
 
 export const useAuth = create((set) => ({
   currentUser: null,
