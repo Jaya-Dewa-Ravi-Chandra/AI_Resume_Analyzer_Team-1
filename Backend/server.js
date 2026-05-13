@@ -10,7 +10,7 @@ config();
 const app=exp();
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://ai-resume-analyzer-team-1.vercel.app/",
     credentials: true,
   }),
 );
