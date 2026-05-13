@@ -23,7 +23,7 @@ const Dashboard = () => {
   // ================= FETCH RESUMES =================
   const fetchResumes = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/resumeApi/resume", {
+      const res = await axios.get("https://ai-resume-analyzer-team-1.onrender.com/resumeApi/resume", {
         withCredentials: true,
       });
 
@@ -98,7 +98,7 @@ const Dashboard = () => {
       formData.append("jobTitle", jobRole);
 
       const res = await axios.post(
-        "http://localhost:4000/resumeApi/upload",
+        "https://ai-resume-analyzer-team-1.onrender.com/upload",
         formData,
         {
           withCredentials: true,
@@ -133,7 +133,7 @@ const Dashboard = () => {
   const handleDelete = async (id) => {
     try {
       await axios.put(
-        `http://localhost:4000/resumeApi/softdelete/${id}`,
+        `https://ai-resume-analyzer-team-1.onrender.com/resumeApi/softdelete/${id}`,
         {},
         {
           withCredentials: true,
