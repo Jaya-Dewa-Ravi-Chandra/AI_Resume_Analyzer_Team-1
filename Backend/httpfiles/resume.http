@@ -1,0 +1,28 @@
+###
+POST http://localhost:4000/resumeApi/upload
+###
+//to softdelete resumes
+PUT http://localhost:4000/resumeApi/softdelete/69fafb33e4034c35a9cbd27d
+
+###
+//to get all the resumes
+GET http://localhost:4000/resumeApi/resume
+###
+
+//to get the resumes by id
+GET http://localhost:4000/resumeApi/resume/69fafb37e4034c35a9cbd283
+###
+
+//to get resumes in the trash
+GET http://localhost:4000/resumeApi/trash
+
+###
+//to delete permanently in db
+DELETE http://localhost:4000/resumeApi/permanent/69fafb37e4034c35a9cbd283
+###
+
+//to restore the files in trash bin
+PATCH http://localhost:4000/resumeApi/restore/69fafb33e4034c35a9cbd27d
+
+###
+GET http://localhost:4000/resumeApi/download/69fc51b18bc849d63b989d45

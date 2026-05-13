@@ -1,0 +1,12 @@
+//to get all the users
+GET http://localhost:4000/adminApi/emails
+###
+
+//to block and unblock users
+PUT http://localhost:4000/adminApi/userStatus
+Content-Type: application/json
+
+{
+    "email":"dewa@gmail.com",
+    "isUserActive":true
+}

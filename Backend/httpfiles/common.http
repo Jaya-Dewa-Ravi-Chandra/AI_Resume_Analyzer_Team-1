@@ -1,0 +1,33 @@
+###
+POST http://localhost:4000/commonApi/register
+Content-Type: application/json
+
+{
+    "role":"USER",
+    "Fname":"Sravanya",
+    "Lname":"Gunna",
+    "email":"guna@gmail.com",
+    "password":"gunna123",
+    "isUserActive":true
+}
+###
+POST http://localhost:4000/commonApi/login
+Content-Type: application/json
+
+{
+    "email":"admin@gmail.com",
+    "password":"gunna123"
+}
+###
+GET http://localhost:4000/commonApi/logout
+###
+PUT http://localhost:4000/commonApi/password
+Content-Type: application/json
+
+{
+    "currentpassword":"gunna123",
+    "newpassword":"guna123"
+}
+
+###
+GET http://localhost:4000/commonApi/check-auth
