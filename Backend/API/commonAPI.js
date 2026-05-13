@@ -52,8 +52,8 @@ commonApp.post("/login",async(req,res)=>{
         //place token in cookie
         res.cookie("token",signedToken,{
             httpOnly:true,
-            secure:false,//for production use secure:true
-            sameSite:"lax"//for production use sameSite:"none"
+            secure:true,//for production use secure:true
+            sameSite:"none"//for production use sameSite:"none"
         })
         let userObj=user.toObject()
         delete userObj.password
@@ -69,8 +69,8 @@ commonApp.get('/logout',async(req,res)=>{
         //delete cookie
         res.clearCookie("token",{
             httpOnly:true,
-            secure:false,
-            sameSite:"lax"
+            secure:true,
+            sameSite:"none"
         })
         res.status(200).json({message:"Logout Successful"})
 })
