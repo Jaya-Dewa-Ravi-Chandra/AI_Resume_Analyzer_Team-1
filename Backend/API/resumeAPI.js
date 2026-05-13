@@ -39,7 +39,7 @@ resumeApp.post(
       const jobTitle = req.body.jobTitle || "Software Developer";
 
       // ================= UPLOAD ORIGINAL PDF =================
-
+      console.log("STEP 1");
       const resultpdf = await new Promise((resolve, reject) => {
         const uploadStream = cloudinary.uploader.upload_stream(
           {
@@ -213,7 +213,7 @@ IMPORTANT RULES:
 Resume:
 ${resumeText}
 `;
-
+      console.log("STEP 2");
       const result = await model.generateContent(prompt);
 
       const text = result.response.text();
@@ -292,8 +292,9 @@ ${resumeText}
       }
 
       // ================= GENERATE OPTIMIZED PDF =================
-
+      console.log("STEP 3");
       const filePath = `/tmp/optimized-${Date.now()}.pdf`;
+      console.log("STEP 4");
 
       const doc = new PDFDocument({
         margin: 50,
