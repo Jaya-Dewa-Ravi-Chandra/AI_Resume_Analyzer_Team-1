@@ -18,12 +18,6 @@ export const resumeApp = exp.Router();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// ================= CREATE UPLOADS FOLDER =================
-
-if (!fs.existsSync("./uploads")) {
-  fs.mkdirSync("./uploads");
-}
-
 // ================= UPLOAD RESUME =================
 
 resumeApp.post(
@@ -51,7 +45,7 @@ resumeApp.post(
           {
             resource_type: "raw",
             folder: "resumes",
-            format:"pdf",
+            format: "pdf",
           },
           (error, result) => {
             if (error) reject(error);
@@ -175,47 +169,6 @@ STRICT JSON FORMAT:
   }
 }
 
-IMPORTANT RULES:
-
-1. improvements MUST be objects with:
-   - heading
-   - content
-
-2. skills MUST be array of objects.
-
-3. projects.description MUST be array of strings.
-
-4. projects.technologies MUST be array of strings.
-
-5. experience.description MUST be array of strings.
-
-6. education.details MUST be array of strings.
-
-7. certifications MUST be array of objects.
-
-8. achievements MUST be array of objects.
-
-9. Do NOT generate fields like:
-   - linkedin
-   - githubLink
-   - date
-   - url
-   - tools
-   - techStack
-
-10. Use ONLY fields defined in the schema.
-
-11. If data is unavailable return:
-   - empty string ""
-   - empty array []
-
-12. skills_analysis MUST contain ONLY the top 5 most important skills
-    relevant to the job role.
-
-13. score must be between 1 and 100.
-
-14. Return skills in descending order of score.
-
 Resume:
 ${resumeText}
 `;
@@ -288,18 +241,22 @@ ${resumeText}
       // ================= NORMALIZE CERTIFICATIONS =================
 
       if (!Array.isArray(data.certifications)) {
-        data.certifications = data.certifications ? [data.certifications] : [];
+        data.certifications = data.certifications
+          ? [data.certifications]
+          : [];
       }
 
       // ================= NORMALIZE ACHIEVEMENTS =================
 
       if (!Array.isArray(data.achievements)) {
-        data.achievements = data.achievements ? [data.achievements] : [];
+        data.achievements = data.achievements
+          ? [data.achievements]
+          : [];
       }
 
       // ================= GENERATE OPTIMIZED PDF =================
 
-      const filePath = `./uploads/optimized-${Date.now()}.pdf`;
+      const filePath = `/tmp/optimized-${Date.now()}.pdf`;
 
       const doc = new PDFDocument({
         margin: 50,
@@ -344,8 +301,6 @@ ${resumeText}
 
       // ================= SKILLS =================
 
-      // ================= SKILLS =================
-
       if (data.skills.length > 0) {
         doc.fontSize(18).text("Skills");
 
@@ -355,7 +310,9 @@ ${resumeText}
           doc
             .fontSize(12)
             .text(
-              `${skill.category || "Skills"}: ${skill.items?.join(", ") || ""}`,
+              `${skill.category || "Skills"}: ${
+                skill.items?.join(", ") || ""
+              }`,
             );
 
           doc.moveDown(0.3);
@@ -482,7 +439,7 @@ ${resumeText}
         folder: "optimized_resumes",
       });
 
-      // ================= DELETE LOCAL FILE =================
+      // ================= DELETE TEMP FILE =================
 
       fs.unlinkSync(filePath);
 
@@ -505,8 +462,6 @@ ${resumeText}
 
       await resume.save();
 
-      // ================= RESPONSE =================
-
       return res.status(201).json({
         message: "Resume uploaded successfully",
         payload: resume,
@@ -520,194 +475,3 @@ ${resumeText}
     }
   },
 );
-
-// ================= SOFT DELETE =================
-
-resumeApp.put("/softdelete/:id", verifyToken("USER"), async (req, res) => {
-  try {
-    const updated = await ResumeModel.findOneAndUpdate(
-      {
-        _id: req.params.id,
-        userId: new mongoose.Types.ObjectId(req.user.id),
-        isDeleted: false,
-      },
-      {
-        isDeleted: true,
-      },
-      {
-        returnDocument: "after",
-      },
-    );
-
-    if (!updated) {
-      return res.status(404).json({
-        message: "Resume not found",
-      });
-    }
-
-    return res.status(200).json({
-      message: "Resume moved to trash",
-    });
-  } catch (err) {
-    return res.status(500).json({
-      error: err.message,
-    });
-  }
-});
-
-// ================= GET ALL RESUMES =================
-
-resumeApp.get("/resume", verifyToken("USER"), async (req, res) => {
-  try {
-    const resumes = await ResumeModel.find({
-      userId: req.user.id,
-      isDeleted: false,
-    });
-
-    res.status(200).json({
-      message: "User resumes fetched successfully",
-      payload: resumes,
-    });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
-});
-
-// ================= GET RESUME BY ID =================
-
-resumeApp.get("/resume/:id", verifyToken("USER"), async (req, res) => {
-  try {
-    const resume = await ResumeModel.findOne({
-      _id: req.params.id,
-      userId: req.user.id,
-    });
-
-    if (!resume) {
-      return res.status(404).json({
-        message: "Not found",
-      });
-    }
-
-    res.status(200).json({
-      payload: resume,
-    });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
-});
-
-// ================= TRASH =================
-
-resumeApp.get("/trash", verifyToken("USER"), async (req, res) => {
-  try {
-    const resumes = await ResumeModel.find({
-      userId: req.user.id,
-      isDeleted: true,
-    });
-
-    const filtered = resumes.map((r) => ({
-      id: r._id,
-      fileName: r.fileName,
-      fileUrl: r.fileUrl,
-    }));
-
-    res.status(200).json({
-      message: "Trash Bin",
-      payload: filtered,
-    });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
-});
-
-// ================= PERMANENT DELETE =================
-
-resumeApp.delete("/permanent/:id", verifyToken("USER"), async (req, res) => {
-  try {
-    const resume = await ResumeModel.findOneAndDelete({
-      _id: req.params.id,
-      userId: req.user.id,
-      isDeleted: true,
-    });
-
-    if (!resume) {
-      return res.status(404).json({
-        message: "Resume not found",
-      });
-    }
-
-    res.status(200).json({
-      message: "Resume permanently deleted",
-    });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
-});
-
-// ================= RESTORE =================
-
-resumeApp.patch("/restore/:id", verifyToken("USER"), async (req, res) => {
-  try {
-    const resume = await ResumeModel.findOneAndUpdate(
-      {
-        _id: req.params.id,
-        userId: req.user.id,
-        isDeleted: true,
-      },
-      {
-        isDeleted: false,
-      },
-      {
-        returnDocument: "after",
-      },
-    );
-
-    if (!resume) {
-      return res.status(404).json({
-        message: "Resume not found",
-      });
-    }
-
-    res.status(200).json({
-      message: "Resume restored",
-    });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
-});
-
-// ================= DOWNLOAD =================
-
-resumeApp.get("/download/:id", verifyToken("USER"), async (req, res) => {
-  try {
-    const resume = await ResumeModel.findOne({
-      _id: req.params.id,
-      userId: req.user.id,
-      isDeleted: false,
-    });
-
-    if (!resume) {
-      return res.status(404).json({
-        message: "Resume not found",
-      });
-    }
-
-    res.status(200).json({
-      optimizedFileUrl: resume.optimizedFileUrl,
-    });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
-});
