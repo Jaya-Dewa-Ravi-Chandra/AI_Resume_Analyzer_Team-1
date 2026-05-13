@@ -30,7 +30,7 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/commonApi/register",
+        "https://ai-resume-analyzer-team-1.onrender.com/register",
         form,
       );
 
