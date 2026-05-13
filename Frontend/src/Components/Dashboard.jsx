@@ -98,7 +98,7 @@ const Dashboard = () => {
       formData.append("jobTitle", jobRole);
 
       const res = await axios.post(
-        "https://ai-resume-analyzer-team-1.onrender.com/upload",
+        "https://ai-resume-analyzer-team-1.onrender.com/resumeApi/upload",
         formData,
         {
           withCredentials: true,
