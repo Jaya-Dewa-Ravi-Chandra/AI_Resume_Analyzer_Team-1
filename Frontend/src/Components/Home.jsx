@@ -32,7 +32,7 @@ const Home = () => {
         {/* Left Content */}
         <div className="max-w-lg">
           <h1 className="text-3xl md:text-5xl font-bold text-emerald-500 mb-4">
-           AI Resume ANalyzer
+           AI Resume Analyzer
           </h1>
           <h1 className="text-3xl md:text-5xl font-bold text-gray-800 mb-4">
             Smarter CVs, Faster Decisions
