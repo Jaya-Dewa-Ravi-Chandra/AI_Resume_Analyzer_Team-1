@@ -70,7 +70,7 @@ const Dashboard = () => {
       setDroppedFileName(acceptedFiles[0].name);
     }
   };
-
+console.log(1);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
@@ -78,7 +78,7 @@ const Dashboard = () => {
     },
     multiple: false,
   });
-
+console.log(2);
   // ================= UPLOAD =================
   const handleFileUpload = async () => {
     try {
@@ -86,17 +86,17 @@ const Dashboard = () => {
         alert("Please select a PDF and enter Job Title");
         return;
       }
-
+console.log(3);
       setUploadLoading(true);
 
       const formData = new FormData();
 
       // MUST MATCH BACKEND upload.single("resume")
       formData.append("resume", selectedFile);
-
+console.log(4);
       // MUST MATCH BACKEND req.body.jobTitle
       formData.append("jobTitle", jobRole);
-
+console.log(5);
       const res = await axios.post(
         "https://ai-resume-analyzer-team-1.onrender.com/resumeApi/upload",
         formData,
@@ -107,9 +107,9 @@ const Dashboard = () => {
           },
         },
       );
-
+console.log(6);
       const uploadedResume = res.data.payload;
-
+console.log(7);
       // refresh resumes
       await fetchResumes();
 
