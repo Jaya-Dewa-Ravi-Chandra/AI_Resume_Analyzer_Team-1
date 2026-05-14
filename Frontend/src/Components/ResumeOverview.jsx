@@ -292,7 +292,7 @@ function ResumeOverview() {
               <div className="flex-1 bg-gray-200 p-4">
                 {resume ? (
                   <iframe
-                    src={resume}
+                    src={`${resume}#toolbar=0&navpanes=0&scrollbar=0`}
                     title="resume-pdf"
                     className="w-full h-full rounded-xl border border-gray-300 bg-white"
                   />
@@ -336,7 +336,7 @@ function ResumeOverview() {
               <div className="flex-1 bg-gray-200 p-4">
                 {optimized ? (
                   <iframe
-                    src={optimized}
+                    src={`${optimized}#toolbar=0&navpanes=0&scrollbar=0`}
                     title="optimized-pdf"
                     className="w-full h-full rounded-xl border border-gray-300 bg-white"
                   />
