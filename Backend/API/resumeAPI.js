@@ -19,7 +19,7 @@ export const resumeApp = exp.Router();
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // ================= UPLOAD RESUME =================
-console.log(01);
+console.log(10);
 resumeApp.post(
   "/upload",
   verifyToken("USER"),
