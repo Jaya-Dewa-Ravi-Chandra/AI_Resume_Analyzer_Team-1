@@ -31,12 +31,14 @@ const Home = () => {
       <section className="flex flex-col md:flex-row items-center justify-between px-12 py-16">
         {/* Left Content */}
         <div className="max-w-lg">
+          <h1 className="text-3xl md:text-5xl font-bold text-emerald-500 mb-4">
+           AI Resume ANalyzer
+          </h1>
           <h1 className="text-3xl md:text-5xl font-bold text-gray-800 mb-4">
             Smarter CVs, Faster Decisions
           </h1>
 
           <p className="text-gray-600 mb-7">
-            AI Resume Analyzer
             Stop scanning endless CVs — let AI surface the right talent with
             instant match scores and keyword insights.
           </p>
