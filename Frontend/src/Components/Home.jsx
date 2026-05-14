@@ -36,6 +36,7 @@ const Home = () => {
           </h1>
 
           <p className="text-gray-600 mb-7">
+            AI Resume Analyzer
             Stop scanning endless CVs — let AI surface the right talent with
             instant match scores and keyword insights.
           </p>
