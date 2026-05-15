@@ -45,12 +45,6 @@ Backend/
 │   ├── common.http
 │   └── resume.http
 ├── middlewares/
-│   └── verifyToken.js
-├── uploads/
-│   ├── hi.pdf
-│   └── optimized-*.pdf
-├── server.js
-├── package.json
 └── README.md
 
 
