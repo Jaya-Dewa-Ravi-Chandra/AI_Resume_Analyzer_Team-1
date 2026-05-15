@@ -1,34 +1,35 @@
-AI-Powered Resume Analyzer
+# AI-Powered Resume Analyzer
 
-An intelligent application that helps recruiters, HR professionals, and job seekers analyze resumes using AI.  
+An intelligent web application that helps recruiters, HR professionals, and job seekers analyze resumes using AI.  
+Built with **React**, **Tailwind CSS**, and integrated with AI models for resume parsing, scoring, and recommendations.
+
 ---
 
-Features
-- Resume Upload & Parsing: Upload resumes in PDF/DOCX format and extract structured data.
-- AI-Powered Analysis: Evaluate resumes based on keywords, skills, and role-specific requirements.
-- Role-Based Dashboards:
-  - User: Upload and track resume performance.
-  - Author: Manage templates and analysis rules.
-  - Admin: Oversee system usage and manage users.
-- Trash Bin: Deleted resumes are stored temporarily with restore options.
-- Authentication: Secure login/register system with role-based access.
-- Cloud Integration: Resume files stored and optimized using Cloudinary.
-- Middleware Security: JWT-based token verification for protected routes.
+## Features
+- **Resume Upload & Parsing**: Upload resumes in PDF/DOCX format and extract structured data.
+- **AI-Powered Analysis**: Evaluate resumes based on keywords, skills, and role-specific requirements.
+- **Role-Based Dashboards**:
+  - **User**: Upload and track resume performance.
+  - **Author**: Manage templates and analysis rules.
+  - **Admin**: Oversee system usage and manage users.
+- **Trash Bin**: Deleted resumes are stored temporarily with restore options.
+- **Responsive UI**: Clean, modern interface built with Tailwind CSS.
+- **Authentication**: Secure login/register system with role-based access.
 
---------------
+---
 
-Tech Stack
-- Frontend: React, Tailwind CSS
-- Backend: Node.js, Express
-- Database: MongoDB
-- AI Integration: Google Gemini API for resume parsing & scoring
-- File Handling: Multer for uploads, Cloudinary for storage
-- Version Control: GitHub
+## Tech Stack
+- **Frontend**: React, Tailwind CSS
+- **Backend**: Node.js / Express (or your chosen backend)
+- **Database**: MongoDB / PostgreSQL
+- **AI Integration**: NLP models for resume parsing & scoring
+- **Version Control**: GitHub
 
--------------------------------------
+---
 
-Project Structure
+## Project Structure
 
+```
 Backend/
 ├── API/
 │   ├── adminAPI.js
@@ -52,8 +53,8 @@ Backend/
 ├── server.js
 ├── package.json
 └── README.md
-
-
+```
+```
 Frontend/
 ├── public/
 ├── src/
@@ -84,6 +85,6 @@ Frontend/
 ├── package-lock.json
 ├── package.json
 └── vite.config.js
-
+```
 
 
