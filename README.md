@@ -10,7 +10,6 @@ Built with **React**, **Tailwind CSS**, and integrated with AI models for resume
 - **AI-Powered Analysis**: Evaluate resumes based on keywords, skills, and role-specific requirements.
 - **Role-Based Dashboards**:
   - **User**: Upload and track resume performance.
-  - **Author**: Manage templates and analysis rules.
   - **Admin**: Oversee system usage and manage users.
 - **Trash Bin**: Deleted resumes are stored temporarily with restore options.
 - **Responsive UI**: Clean, modern interface built with Tailwind CSS.
