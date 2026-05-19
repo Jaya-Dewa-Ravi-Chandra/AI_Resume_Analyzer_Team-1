@@ -14,6 +14,7 @@ const SignUp = () => {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -29,6 +30,8 @@ const SignUp = () => {
     }
 
     try {
+      setLoading(true);
+
       const response = await axios.post(
         "https://ai-resume-analyzer-team-1.onrender.com/commonApi/register",
         form,
@@ -45,8 +48,10 @@ const SignUp = () => {
     } catch (error) {
       setError(error.response?.data?.message || "Something went wrong");
       setSuccess("");
+      setLoading(false);
     }
   };
+
   return (
     <div className="flex justify-center items-center h-screen bg-gray-400">
       <form
@@ -57,7 +62,9 @@ const SignUp = () => {
           Sign Up
         </h2>
 
-        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+        {error && (
+          <p className="text-red-500 text-sm text-center">{error}</p>
+        )}
 
         {success && (
           <p className="text-green-500 text-sm text-center">{success}</p>
@@ -95,8 +102,11 @@ const SignUp = () => {
           className="w-full p-2 border rounded-md focus:outline-emerald-600"
         />
 
-        <button className="w-full bg-emerald-600 text-white py-2 rounded-md hover:bg-emerald-700 transition">
-          Create Account
+        <button
+          disabled={loading}
+          className="w-full bg-emerald-600 text-white py-2 rounded-md hover:bg-emerald-700 transition disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          {loading ? "Creating..." : "Create Account"}
         </button>
       </form>
     </div>
