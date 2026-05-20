@@ -18,7 +18,7 @@ export const useAuth = create((set) => ({
       });
 
       set({
-        currentUser: res.data?.payload,
+        currentUser: res.data?.user,
         loading: false,
         isAuthenticated: true,
         error: null,
@@ -46,7 +46,7 @@ export const useAuth = create((set) => ({
       });
 
       set({
-        currentUser: res.data?.payload,
+        currentUser: res.data?.user,
         loading: false,
         isAuthenticated: true,
         error: null,
