@@ -33,7 +33,7 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("submit clicked");
     if (!form.email || !form.password) {
       return alert("All fields are required");
     }
@@ -43,11 +43,12 @@ const SignIn = () => {
     }
 
     const result = await login(form);
-
+    console.log(result);
   if (result.success) {
     // get updated user from zustand
     const user = useAuth.getState().currentUser;
-
+console.log(useAuth.getState());
+console.log(response.data);
     if (user?.role?.toUpperCase() === "ADMIN") {
       navigate("/admin");
     } else {
